@@ -1,32 +1,70 @@
 <!DOCTYPE html>
 <html lang="jp" >
 <head>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <title>motorin</title>
   <meta name="description" content="ソロツーリング中に使えるアプリ。バイクが話しかけてくる感覚的なことを書く←整理が必要">
+  <!-- favicon アイコンの設定 --> 
+  <link rel="shortcut icon" href="image/favicon.ico" type="image/vnd.microsoft.icon">
+  <link rel="icon" href="image/favicon.ico" type="image/vnd.microsoft.icon">
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
 
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-   		integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-   		crossorigin=""/>
- 			<!-- Make sure you put this AFTER Leaflet's CSS -->
- 		<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-   		integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-   		crossorigin=""></script>
+<!-- partial:index.partial.html -->
+<script  src="script.js"></script>
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	crossorigin=""/>
+		<!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	crossorigin=""></script>
 
     <div class="header">
-    	<img src="https://i.postimg.cc/CK0mR2Cf/motorin-App-Logo.png" class="header-logo" alt="logo">
+    	<img src="https://i.gyazo.com/81dd86eda9b89b4011f4efd8bfdba7d7.png" class="header-logo" alt="logo">
     </div>
-		<div id="mapid"></div>
-		<button id="button">Start</button>
 
-</html>
-<!-- partial -->
-  <script  src="./script.js"></script>
+	<!-- Start マップ -->
+	<div id="mapid"></div>
+	<button id="button">Start</button>
+	<button id="button2">Finish</button>
+
+<!-- Start チェックポイント 
+	<img src="https://i.gyazo.com/e53841c16822fb2ba1d416442837bf18.png" class="checkPoint" alt="">
+
+ Finish チェックポイント -->
+
+	<!-- Start ハンバーガーメニュー -->
+	<!-- 参考URL→https://note.spiqa.design/hamburer/ -->
+	<div id="nav-wrapper" class="nav-wrapper">
+		<div class="hamburger" id="js-hamburger">
+		  <span class="hamburger__line hamburger__line--1"></span>
+		  <span class="hamburger__line hamburger__line--2"></span>
+		  <span class="hamburger__line hamburger__line--3"></span>
+		</div>
+		<nav class="sp-nav">
+		  <ul class="container" id="list">
+			<li><img src="https://maps.gsi.go.jp/image/map/crosshairs.png">初期アイコン</li>
+			<li><img src="https://i.postimg.cc/63mKxMZP/I8d1-Di-HQY8e5-Meu1635871349-1635871569.jpg"></li>
+			<li><img src="https://i.gyazo.com/d5d2d6a399df1c6f068b2b7a6ddde688.jpg"></li>
+			<li><img src="https://i.gyazo.com/c15ee5223e562ebcd5dacd26f9efd0e0.jpg"></li>
+			<li><img src="https://i.gyazo.com/3feffe80b4c806b2a6d40dbe63becabd.jpg"></li>
+			<li><img src=""></li>
+		  </ul>
+		  <ul class="moveSite">
+			<li><a href="indexSpe.html" class="item">Spetial Thanksページへ</a></li>
+			<li><a href="https://note.com/yui8686kouy/n/nca5a2903c6f9" target="_blank" rel="noopener" class="item">MOTORIN!使い方ページへ<br />※外部サイト(note)を別タブで開きます。</a></li>
+			<!-- note共有用URL → https://note.com/preview/nca5a2903c6f9?prev_access_key=678344c15542679642c76c263ca0bcfc -->
+			<!-- note航海用URL → https://note.com/yui8686kouy/n/nca5a2903c6f9 -->			
+			<!-- 別タブで開く 参考URL→https://techacademy.jp/magazine/23824 -->
+		</ul>
+		</nav>
+		<div class="black-bg" id="js-black-bg"></div>
+	</div>
+	<!-- finish ハンバーガーメニュー -->
 
 </body>
 </html>

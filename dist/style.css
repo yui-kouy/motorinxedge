@@ -2,6 +2,8 @@
 	position: absolute;
   width: 100%;
 	height: 100%;
+  top: 80px;
+  bottom: auto;
 	left: center;
 	top: center;
   z-index: 1;
@@ -9,16 +11,30 @@
 
 #button {
 	position: absolute;
-	left: calc(50% - 100px);
-  width: 200px;
-  height: 58px;
+	left: calc(50% - 150px);
+  width: 300px;
+  height: 100px;
 	bottom: 25px; 
   background: #152783;
   border-radius: 24px;
-	font-size: 40px;
+	font-size: 60px;
   line-height: 56px;
 	color: #FFFFFF;
   z-index: 2;
+}
+
+#button2 {
+	position: absolute;
+	left: calc(50% - 150px);
+  width: 300px;
+  height: 100px;
+	bottom: 25px;
+  background: #152783;
+  border-radius: 24px;
+	font-size: 60px;
+  line-height: 56px;
+	color: #FFFFFF;
+  z-index: 3;
 }
 
 .header {
@@ -28,16 +44,126 @@
   left: 0px;
   top: 0px;
   background: #152783;
-	z-index: 3;
+	z-index: 4;
 }
 
 /*ロゴ_MotoRin_*/
 .header-logo {
   position: absolute;
-  width: 107px;
-  height: 58px;
+  /*width: 15%;*/
+  height: 55px;
   left: 7px;
-  top: 13px;
-  background: url(ロゴ_MotoRin_2.png);
-  z-index: 4;
+  top: 15px;
+  z-index: 5;
+}
+
+/*---------------------------------------------*/
+/*ハンバーガーメニュー*/
+/*---------------------------------------------*/
+/* 
+hamburger(ハンバーガーアイコン)
+=================================== */
+.hamburger {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 50px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 300;
+}
+
+/* 三 と × のことっぽい */
+.hamburger__line {
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  right: 0;
+  background-color: #0bd;
+  transition: all 0.5s;
+}
+
+/* 三 の上から1～3事を一個ずつ書いている */
+.hamburger__line--1 {
+  top: 1px;
+}
+
+.hamburger__line--2 {
+  top: 18px;
+}
+
+.hamburger__line--3 {
+  top: 36px;
+}
+
+/* ハンバーガーがクリックされたら 三 → × になるように書いている */
+.open .hamburger__line--1 {
+  transform: rotate(-45deg);
+  top: 11px;
+}
+
+.open .hamburger__line--2 {
+  opacity: 0;
+}
+
+.open .hamburger__line--3 {
+  transform: rotate(45deg);
+  top: 11px;
+}
+
+/* 
+sp-nav(ナビ)
+=================================== */
+.sp-nav {
+  position: fixed;
+  right: -100%; /*ハンバーガーがクリックされる前はWindow右側に隠す*/
+  top: 0;
+  width: 70%; /* 出てくるスライドメニューの幅 */
+  height: 100vh;
+  background-color: #fff;
+  transition: all 0.5s;
+  z-index: 200;
+  overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+}
+
+/*ハンバーガーがクリックされたら右からスライド*/
+.open .sp-nav {
+  right: 0;
+}
+
+
+/* 
+black-bg(ハンバーガーメニュー解除用bg)
+=================================== */
+.black-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s;
+  cursor: pointer;
+  z-index: 100;
+}
+
+/*ハンバーガーメニューが開いたら表示*/
+.open .black-bg {
+  opacity: 0.3;
+  visibility: visible;
+}
+
+/* 画像の表示 大きさ揃えたい */
+.container{
+  margin-top: 30px;
+  font-size: 50px;
+}
+
+.moveSite{
+
+  font-size: 50px;
+
 }
