@@ -1,5 +1,5 @@
 // ハンバーガーメニュー
-window.onload = function () {
+window.addEventListener('load', function () {
     var nav = document.getElementById('nav-wrapper');
     var hamburger = document.getElementById('js-hamburger');
     var blackBg = document.getElementById('js-black-bg');
@@ -10,7 +10,8 @@ window.onload = function () {
     blackBg.addEventListener('click', function () {
         nav.classList.remove('open');
     });
-};
+});
+
 // アプリメイン機能
 function success(position) {
 	const strlat = position.coords.latitude;
