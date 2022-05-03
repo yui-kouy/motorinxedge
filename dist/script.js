@@ -123,6 +123,7 @@ function success(position) {
 		document.getElementById("button").style.visibility = "hidden"    // buttonを非表示
 		document.getElementById("button2").style.visibility = "visible"  // button2を表示
 
+		// 始まりのセリフ
 		// Startするとよろしく的な挨拶をしゃべるようにする
 		const startSerifuHai = ["今日もよろしくお願いします！",
 								"安全運転で行きましょう！",
@@ -266,113 +267,118 @@ function success(position) {
 						  "ランダムヨン",
 						  "ランダムゴ"];
 
-		let koukaon ="";
+		let koukaon = "";
 		let serifu = "";
 
+		let idouCnt = 0;	// idou内の処理回数をカウントするもの
+		let idouCntMod = 0;
 		// ここから時間経過でセリフをランダムで話す記述など
 		let idou = setInterval(function(){
-
-		function successIn(position) {
-			let lat = position.coords.latitude;
-			let lon = position.coords.longitude;
-			// console.log("緯度lat:" + lat);
-			// console.log("経度lon:" + lon);
-			
-			// マップを移動するっぽい
-			map.panTo([lat, lon]);
-
-			// アイコンを移動させる
-			// 表示しているアイコンを消す
-			map.removeLayer(crossMarker);
-			// アイコンを再表示
-			crossMarker = L.marker( map.getCenter(),{
-				icon:crossIcon,  
-				zIndexOffset:1000, 
-				interactive:false 
-				}).addTo(map);
-
-			// チェックポイントが近いか確認
-			// whileでループ処理してすべて確認する
-			// 一致していたらチェックポイントの処理に入る
-			
-			let a=0; // ifのために一時的に使用 a=2だったら緯度経度両方が近いことになるはず
-			let latHani = 0; // 緯度：比較するため
-			let lonHani = 0; // 経度：比較するため
-			WhileCnt = 0;
-
-			// 80か所のマーカーの緯度経度と現在地を比較する(大体近ければOK。どれくらいの数値誤差で比較するか要検討)
-			while(WhileCnt < 200){
+			idouCnt +=1;
+			function successIn(position) {
+				let lat = position.coords.latitude;
+				let lon = position.coords.longitude;
+				// console.log("緯度lat:" + lat);
+				// console.log("経度lon:" + lon);
 				
-				// 現在の緯度経度の差分を計算
+				// マップを移動するっぽい
+				map.panTo([lat, lon]);
 
-				latHani = Math.floor((latChkHai[WhileCnt] - lat) * Math.pow(10,5)) / Math.pow(10,5);
-				lonHani = Math.floor((lonChkHai[WhileCnt] - lon) * Math.pow(10,5)) / Math.pow(10,5);
+				// アイコンを移動させる
+				// 表示しているアイコンを消す
+				map.removeLayer(crossMarker);
+				// アイコンを再表示
+				crossMarker = L.marker( map.getCenter(),{
+					icon:crossIcon,  
+					zIndexOffset:1000, 
+					interactive:false 
+					}).addTo(map);
 
-				// console.log("緯度" + WhileCnt + "回目：" + latChkHai[WhileCnt] + " - " + lat + " = " + latHani);
-				// console.log("経度" + WhileCnt + "回目：" + lonChkHai[WhileCnt] + " - " + lon + " = " + lonHani);
+				// チェックポイントが近いか確認
+				// whileでループ処理してすべて確認する
+				// 一致していたらチェックポイントの処理に入る
+				
+				let a=0; // ifのために一時的に使用 a=2だったら緯度経度両方が近いことになるはず
+				let latHani = 0; // 緯度：比較するため
+				let lonHani = 0; // 経度：比較するため
+				WhileCnt = 0;
 
-				// 計算結果を比較する　緯度バージョン
-				if(latHani <= 0.00001 && latHani >= -0.00001){
-					a++;
-					// console.log(WhileCnt + "回目：" +  "a:" + a)
-					// 計算結果を比較する　経度バージョン
-					if(lonHani <= 0.00001 && lonHani >= -0.00001 ){
+				// 80か所のマーカーの緯度経度と現在地を比較する(大体近ければOK。どれくらいの数値誤差で比較するか要検討)
+				while(WhileCnt < 200){
+					
+					// 現在の緯度経度の差分を計算
+
+					latHani = Math.floor((latChkHai[WhileCnt] - lat) * Math.pow(10,5)) / Math.pow(10,5);
+					lonHani = Math.floor((lonChkHai[WhileCnt] - lon) * Math.pow(10,5)) / Math.pow(10,5);
+
+					// console.log("緯度" + WhileCnt + "回目：" + latChkHai[WhileCnt] + " - " + lat + " = " + latHani);
+					// console.log("経度" + WhileCnt + "回目：" + lonChkHai[WhileCnt] + " - " + lon + " = " + lonHani);
+
+					// 計算結果を比較する　緯度バージョン
+					if(latHani <= 0.00001 && latHani >= -0.00001){
 						a++;
 						// console.log(WhileCnt + "回目：" +  "a:" + a)
-						WhileCnt = WhileCnt + 80;    // whileから抜けるため 
+						// 計算結果を比較する　経度バージョン
+						if(lonHani <= 0.00001 && lonHani >= -0.00001 ){
+							a++;
+							// console.log(WhileCnt + "回目：" +  "a:" + a)
+							WhileCnt = WhileCnt + 80;    // whileから抜けるため 
+						}else{
+							a = 0;
+						}
 					}else{
 						a = 0;
+						WhileCnt++;	
+					}	
+				}
+
+				console.log("while抜けたところのa:" + a)
+
+				let uttearnce = new SpeechSynthesisUtterance();
+				uttearnce.volume = 1;
+				uttearnce.rate = 1;
+				uttearnce.pitch = 1;
+				uttearnce.lang = 'ja-JP';
+				
+				if(a === 2){	// チェックポイントが近い場合
+					// 参考URL→https://qumeru.com/magazine/376
+					let music = new Audio(cpKokaon[Math.floor(Math.random() * cpKokaon.length)]);
+					music.volume = 0.3;    // 0～1の間で設定 0:無音/1:最大
+					music.play();
+
+					// チェックポイント用のセリフを格納
+					serifu = koukaon + cpSerifu[Math.floor(Math.random() * cpSerifu.length)]; 
+					console.log("a===2の方");
+
+					const sendMessage = async() => {
+						await sleep(1.7*1000);
+						// console.log("sendMessage" + sleep);
+						// ここから共通しゃべる部分
+						console.log(serifu);
+						// ↓話す処理↓
+						uttearnce.text = serifu;
+						window.speechSynthesis.speak(uttearnce);
+						// ↑話す処理↑
 					}
-				}else{
-					a = 0;
-					WhileCnt++;	
-				}	
-			}
+					sendMessage();	// 待つ＆しゃべるを呼び出す
 
-			console.log("while抜けたところのa:" + a)
+				// 一致していなかったら通常の処理に入る
+				// チェックポイントが近くない場合　10分ごとにランダムセリフをしゃべる　10分インターバル中はしゃべらない
+				} else {
+					// idouCntMod = idouCnt % 60;		// 10分に1回しゃべりたい 10秒ごとに位置計測する 6回で1分×10回
+					idouCntMod = idouCnt % 6;		// 1分に1回しゃべる　テスト用
+					console.log("回数：" + idouCnt);
+					console.log("余り：" + idouCntMod);
+					if(idouCntMod === 0){				// あまりが0だったらしゃべる
+						console.log("elseの方");
 
-			let uttearnce = new SpeechSynthesisUtterance();
-			uttearnce.volume = 1;
-			uttearnce.rate = 1;
-			uttearnce.pitch = 1;
-			uttearnce.lang = 'ja-JP';
-			
-			if(a === 2){	// チェックポイントが近い場合
-				// 音を鳴らす Git-HubにUPして使える？Netrifyに音声ファイルも入れられる？
-
-
-				// elseにいるのを戻す
-
-				// チェックポイント用のセリフを格納
-				serifu = koukaon + cpSerifu[Math.floor(Math.random() * cpSerifu.length)]; 
-				console.log("a=2の方")
-			
-			// 一致していなかったら通常の処理に入る
-			// →位置情報から天気が持ってこれる場合は分岐する→これはバージョンアップにて対応へ
-			// →位置情報から観光情報が持ってこれる場合は分岐する→これはバージョンアップにて対応へ
-			// チェックポイントが近くない場合　ランダムセリフをしゃべる
-			} else {
-				// 本来はa===2のところに入れるがテスト用
-				// セリフにかぶるから、2秒くらい待つことができるか？
-				// 参考URL→https://qumeru.com/magazine/376
-				let music = new Audio(cpKokaon[Math.floor(Math.random() * cpKokaon.length)]);
-				music.volume = 0.3;    // 0～1の間で設定 0:無音/1:最大
-				music.play();
-				// --------------------------------------------------
-				serifu = rdSerifu[Math.floor(Math.random() * rdSerifu.length)]; 
-				console.log("elseの方")
+						serifu = rdSerifu[Math.floor(Math.random() * rdSerifu.length)]; 
+						// ↓話す処理↓
+						uttearnce.text = serifu;
+						window.speechSynthesis.speak(uttearnce);
+						// ↑話す処理↑
+					}
 				}
-				const sendMessage = async() => {
-					await sleep(1.7*1000);
-					console.log("sendMessage" + sleep);
-					// ここから共通しゃべる部分
-					console.log(serifu);
-					// ↓話す処理↓
-					uttearnce.text = serifu;
-					window.speechSynthesis.speak(uttearnce);
-					// ↑話す処理↑
-				}
-				sendMessage();	// 待つ＆しゃべるを呼び出す
 			}
 
 			// ボタンを押したらsetIntervalをクリア
@@ -386,11 +392,11 @@ function success(position) {
 				clearInterval(idou);
 
 				// 画面再読み込み
-				location.reload();
+				// location.reload();
 			});
 
-		function errorIn() {
-		}
+			function errorIn() {
+			}
 		navigator.geolocation.getCurrentPosition(successIn, errorIn);
 		},10000);  //1,000=1秒　
 	})
