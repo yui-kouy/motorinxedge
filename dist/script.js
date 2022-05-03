@@ -1,8 +1,23 @@
 // ハンバーガーメニュー
-window.addEventListener('load', function () {
-    var nav = document.getElementById('nav-wrapper');
-    var hamburger = document.getElementById('js-hamburger');
-    var blackBg = document.getElementById('js-black-bg');
+// window.addEventListener('load', function () {
+//     var nav = document.getElementById('nav-wrapper');
+//     var hamburger = document.getElementById('js-hamburger');
+//     var blackBg = document.getElementById('js-black-bg');
+
+//     hamburger.addEventListener('click', function () {
+//         nav.classList.toggle('open');
+//     });
+//     blackBg.addEventListener('click', function () {
+//         nav.classList.remove('open');
+//     });
+// });
+
+// アプリメイン機能
+function success(position) {
+	// ハンバーガーメニュー
+    const nav = document.getElementById('nav-wrapper');
+    const hamburger = document.getElementById('js-hamburger');
+    const blackBg = document.getElementById('js-black-bg');
 
     hamburger.addEventListener('click', function () {
         nav.classList.toggle('open');
@@ -10,12 +25,15 @@ window.addEventListener('load', function () {
     blackBg.addEventListener('click', function () {
         nav.classList.remove('open');
     });
-});
 
-// アプリメイン機能
-function success(position) {
+	// 現在位置本番用（実際の位置）
 	const strlat = position.coords.latitude;
 	const strlon = position.coords.longitude;
+/*
+	// 現在位置テスト用（東京都庁）
+	const strlat = 35.6895014;
+	const strlon = 139.6917337;
+*/
 	// console.log("初期緯度:" + strlat);
 	// console.log("初期経度:" + strlon);
 	
@@ -79,6 +97,10 @@ function success(position) {
 		zIndexOffset:1000, 
 		interactive:false 
 		}).addTo(map);
+
+		// ハンバーガーメニューを閉じる
+		nav.classList.remove('open');
+
 	  });
 	});
 
@@ -257,6 +279,16 @@ function success(position) {
 			
 			// マップを移動するっぽい
 			map.panTo([lat, lon]);
+
+			// アイコンを移動させる
+			// 表示しているアイコンを消す
+			map.removeLayer(crossMarker);
+			// アイコンを再表示
+			crossMarker = L.marker( map.getCenter(),{
+				icon:crossIcon,  
+				zIndexOffset:1000, 
+				interactive:false 
+				}).addTo(map);
 
 			// チェックポイントが近いか確認
 			// whileでループ処理してすべて確認する
