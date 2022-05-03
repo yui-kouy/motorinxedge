@@ -26,11 +26,11 @@ function success(position) {
         nav.classList.remove('open');
     });
 
-	// 現在位置本番用（実際の位置）
+	// 現在位置_本番用（取得した位置情報）
 	const strlat = position.coords.latitude;
 	const strlon = position.coords.longitude;
 /*
-	// 現在位置テスト用（東京都庁）
+	// 現在位置_テスト用（東京都庁）
 	const strlat = 35.6895014;
 	const strlon = 139.6917337;
 */
@@ -127,9 +127,9 @@ function success(position) {
 		const startSerifuHai = ["今日もよろしくお願いします！",
 								"安全運転で行きましょう！",
 								"よっしゃぁ！飛ばすぞぉ！",
-								"よーし！楽しんで走ろう！",
+								"よーし！楽しんで走るぞぉ！",
 								"今日はどこまで行きますか？おともします！",
-								"うん！絶好調！走るぞぉ！",
+								"うーん！絶好調！走るぞぉ！",
 								];
 
 		startSerifu = startSerifuHai[Math.floor(Math.random() * startSerifuHai.length)]; 
@@ -161,12 +161,14 @@ function success(position) {
 		
 		let WhileCnt = 0;		// whileの回数カウント
 		const CalHai = [0.002,0.003,0.0004,0.0005,0.006,0.007,0.0008,0.0009,0.001];
-		const NumHai = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
+		const NumHai = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,
+						20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
+						40,41,42,43,44,45,46,47,48,49];
 		let rdmNum ="";
 		let lati = 0;
 		let loni = 0; 
 
-		while(WhileCnt < 20){
+		while(WhileCnt < 50){
 			
 			// 緯度を加算する
 			rdmNum = CalHai[Math.floor(Math.random() * CalHai.length)]; 
@@ -185,7 +187,7 @@ function success(position) {
 		latHai = strlat;	// 緯度初期値
 		lonHai = strlon;	// 経度初期値
 		
-		while(WhileCnt < 20){
+		while(WhileCnt < 50){
 			
 			// 緯度を減算する
 			rdmNum = CalHai[Math.floor(Math.random() * CalHai.length)]; 
@@ -203,9 +205,8 @@ function success(position) {
 		const latChkHai = [];
 		const lonChkHai = [];
 
-
 		// ループ処理して、マーカーを表示　20×4箇所にアイコン　動き重くならないといいな
-		for(let i = 0; i < 20; i++){
+		for(let i = 0; i < 50; i++){
 
 			lati = NumHai[Math.floor(Math.random() * NumHai.length)]; 
 			loni = NumHai[Math.floor(Math.random() * NumHai.length)]; 
@@ -300,7 +301,7 @@ function success(position) {
 			WhileCnt = 0;
 
 			// 80か所のマーカーの緯度経度と現在地を比較する(大体近ければOK。どれくらいの数値誤差で比較するか要検討)
-			while(WhileCnt < 80){
+			while(WhileCnt < 200){
 				
 				// 現在の緯度経度の差分を計算
 
@@ -360,7 +361,7 @@ function success(position) {
 				// --------------------------------------------------
 				serifu = rdSerifu[Math.floor(Math.random() * rdSerifu.length)]; 
 				console.log("elseの方")
-			}
+				}
 				const sendMessage = async() => {
 					await sleep(1.7*1000);
 					console.log("sendMessage" + sleep);
@@ -385,7 +386,7 @@ function success(position) {
 				clearInterval(idou);
 
 				// 画面再読み込み
-				//location.reload();
+				location.reload();
 			});
 
 		function errorIn() {
