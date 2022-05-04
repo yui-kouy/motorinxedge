@@ -284,15 +284,16 @@ function success(position) {
 				// マップを移動するっぽい
 				map.panTo([lat, lon]);
 
-				// アイコンを移動させる
-				// 表示しているアイコンを消す
-				map.removeLayer(crossMarker);
-				// アイコンを再表示
-				crossMarker = L.marker( map.getCenter(),{
-					icon:crossIcon,  
-					zIndexOffset:1000, 
-					interactive:false 
-					}).addTo(map);
+				map.on('move', e =>  {
+					crossMarker.setLatlon(map.getCenter());
+				});
+				
+				map.on('moveend', e => {
+					// console.log("緯度: " + map.getCenter().lat);
+					// console.log("経度: " + map.getCenter().lon);   
+				});
+				
+
 
 				// チェックポイントが近いか確認
 				// whileでループ処理してすべて確認する
