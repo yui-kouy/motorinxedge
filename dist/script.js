@@ -281,20 +281,20 @@ function success(position) {
 				// console.log("緯度lat:" + lat);
 				// console.log("経度lon:" + lon);
 				
-				// マップを移動するっぽい
+				// panTo：クリックした位置へ地図の中心を移動　←　これいる？
 				map.panTo([lat, lon]);
 
+				// 'move'：マップの移動中に繰り返し実行されます。
 				map.on('move', e =>  {
 					crossMarker.setLatlon(map.getCenter());
 				});
-				
+
+				// 'moveend'：マップのドラッグが終わった場合など、マップの中心が変更されなくなった際に実行されます。
 				map.on('moveend', e => {
 					// console.log("緯度: " + map.getCenter().lat);
 					// console.log("経度: " + map.getCenter().lon);   
 				});
 				
-
-
 				// チェックポイントが近いか確認
 				// whileでループ処理してすべて確認する
 				// 一致していたらチェックポイントの処理に入る
