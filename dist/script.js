@@ -1,17 +1,3 @@
-// ハンバーガーメニュー
-// window.addEventListener('load', function () {
-//     var nav = document.getElementById('nav-wrapper');
-//     var hamburger = document.getElementById('js-hamburger');
-//     var blackBg = document.getElementById('js-black-bg');
-
-//     hamburger.addEventListener('click', function () {
-//         nav.classList.toggle('open');
-//     });
-//     blackBg.addEventListener('click', function () {
-//         nav.classList.remove('open');
-//     });
-// });
-
 // アプリメイン機能
 function success(position) {
 	// ハンバーガーメニュー
@@ -25,15 +11,15 @@ function success(position) {
     blackBg.addEventListener('click', function () {
         nav.classList.remove('open');
     });
-
+/*
 	// 現在位置_本番用（取得した位置情報）
 	const strlat = position.coords.latitude;
 	const strlon = position.coords.longitude;
-/*
+*/
 	// 現在位置_テスト用（東京都庁）
 	const strlat = 35.6895014;
 	const strlon = 139.6917337;
-*/
+
 	// console.log("初期緯度:" + strlat);
 	// console.log("初期経度:" + strlon);
 	
@@ -42,7 +28,7 @@ function success(position) {
 	document.getElementById('button2').style.visibility = 'hidden'    // button2を非表示
 
 	// 現在地をセンターにマップを表示
-	const map = L.map('mapid', {
+	let map = L.map('mapid', {
 		center: [ strlat , strlon ],
 		zoom: 16,
 	}); 
@@ -63,15 +49,15 @@ function success(position) {
 	// アイコンを指定 初期アイコンは十字+
 	let crossIcon = L.icon({
 		iconUrl: aiconUrl[0],
-		iconSize: [45, 45], 
-		iconAnchor: [16, 16] 
+		iconSize: [45, 45],
+		iconAnchor: [16, 16]
 	});
 
 	// アイコンをマップのセンターに表示
 	let crossMarker = L.marker( map.getCenter(),{
-		icon:crossIcon,  
-		zIndexOffset:1000, 
-		interactive:false 
+		icon:crossIcon,
+		zIndexOffset:1000,
+		interactive:false
 	}).addTo(map);
 	
 	// マーカー画像の変更があった場合はアイコンの選択結果によって更新する
@@ -87,8 +73,8 @@ function success(position) {
 
 		crossIcon = L.icon({
 			iconUrl: aiconUrl[aiconNo],
-			iconSize: [45, 45], 
-			iconAnchor: [16, 16] 
+			iconSize: [45, 45],
+			iconAnchor: [16, 16]
 		});
 
 		// アイコンをマップのセンターに表示
@@ -102,15 +88,6 @@ function success(position) {
 		nav.classList.remove('open');
 
 	  });
-	});
-
-	map.on('move', e =>  {
-		crossMarker.setLatlon(map.getCenter());
-	});
-
-	map.on('moveend', e => {
-		// console.log("緯度: " + map.getCenter().lat);
-		// console.log("経度: " + map.getCenter().lon);   
 	});
 
 	const $button = document.querySelector('#button');		// Startボタン
@@ -280,21 +257,20 @@ function success(position) {
 				let lon = position.coords.longitude;
 				// console.log("緯度lat:" + lat);
 				// console.log("経度lon:" + lon);
-				
-				// panTo：クリックした位置へ地図の中心を移動　←　これいる？
+
+                // アイコンのマーカーを消す
+                map.removeLayer(crossMarker);
+
+				// panTo：現在位置へ地図の中心を移動
 				map.panTo([lat, lon]);
 
-				// 'move'：マップの移動中に繰り返し実行されます。
-				map.on('move', e =>  {
-					crossMarker.setLatlon(map.getCenter());
-				});
+        		// アイコンをマップのセンターに表示
+	        	crossMarker = L.marker( map.getCenter(),{
+                    icon:crossIcon,  
+                    zIndexOffset:1000, 
+                    interactive:false 
+                }).addTo(map);
 
-				// 'moveend'：マップのドラッグが終わった場合など、マップの中心が変更されなくなった際に実行されます。
-				map.on('moveend', e => {
-					// console.log("緯度: " + map.getCenter().lat);
-					// console.log("経度: " + map.getCenter().lon);   
-				});
-				
 				// チェックポイントが近いか確認
 				// whileでループ処理してすべて確認する
 				// 一致していたらチェックポイントの処理に入る
@@ -408,5 +384,3 @@ function error() {
 }
 
 navigator.geolocation.getCurrentPosition(success, error);
-
-	
