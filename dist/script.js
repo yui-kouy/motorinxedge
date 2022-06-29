@@ -11,14 +11,16 @@ function success(position) {
     blackBg.addEventListener('click', function () {
         nav.classList.remove('open');
     });
-/*
+
 	// 現在位置_本番用（取得した位置情報）
 	const strlat = position.coords.latitude;
 	const strlon = position.coords.longitude;
-*/
+
+	/*
 	// 現在位置_テスト用（東京都庁）
 	const strlat = 35.6895014;
 	const strlon = 139.6917337;
+	*/
 
 	// console.log("初期緯度:" + strlat);
 	// console.log("初期経度:" + strlon);
@@ -232,17 +234,51 @@ function success(position) {
 						  "music/ma.mp3",
 						  "music/quiz.mp3"];
 
-		const cpSerifu = ["セリフイチ",
-						  "セリフ二",
-						  "セリフサン",
-						  "セリフヨン",
-						  "セリフゴ"];
+		const cpSerifu = ["たらららったらぁ",
+						  "たったらたららららったったぁ",
+						  "チェックポイント通過したね！",
+						  "次はどこのチェックポイントを通過できるかなぁ",
+						  "結構走ったよね？休憩しない？",
+						  "チェックポイントォツウカァ！！",
+						  "わぁーい！チェックポイント通過したね！",
+						  "チェックポイント、まだまだいっぱいあるよぉ！"
+						];
 
-		const rdSerifu = ["ランダムイチ",
-						  "ランダムニ",
-						  "ランダムサン",
-						  "ランダムヨン",
-						  "ランダムゴ"];
+		const rdSerifu = ["どこに行くの？",
+						  "へいへいへーい",
+						  "こんなに走っても走り足りないんだ！",
+						  "たまには休憩も必要だよぉ",
+						  "チェックポイントは通過してないよぉ",
+						  "信号待ちはひと休みだね",
+						  "天気予報は確認した？",
+						  "夏でも冬でも水分補給は必要です！",
+						  "エンジンの音、ちゃんと聞いてね！",
+						  "風を感じるって良いと思うんだ！",
+						  "バイクに乗るって良いでしょ？",
+						  "しょうがい、せいしゅん！",
+						  "車には無い魅力があるでしょ？",
+						  "まだまだ走ろうね",
+						  "もっともっともーっと走りたいな！",
+						  "もっともっと走ってほしいなぁ",
+						  "えいえいおー！",
+						  "前に進めば前進する。あたりまえだね",
+						  "困ったらどっかで止まろう！何とかなる！",
+						  "やってみなくちゃわからない！わからなかったらやってみよう！",
+						  "最後まで希望を捨てちゃいかん。あきらめたら、そこで試合終了だよ",
+						  "なんとかなるよ、絶対大丈夫だよ",
+						  "なせば大抵なんとかなる",
+						  "今までのは奇跡なんかじゃないよ。奇跡はこれからだ",
+						  "無理だったかもしれない、無茶だったかもしれない、でも無駄じゃなかった",
+						  "終わりが見えなくても、焦らなくていいんだよ",
+						  "見ててイライラするなら、見なければいいんだね？",
+						  "楽しい方をえらぼう！",
+						  "面白いか？面白くないか？それは面白い方がいいよねぇ",
+						  "私の戦闘りょくは530000です",
+						  "自分のすきなようにやってごらん",
+						  "ありえないなんて事はありえない！",
+						  "そろそろ何か食べたいかもしれない",
+						  "いっわしったのっ・・・しんっしょうぅが・・・食べたいんじゃない？",
+						];
 
 		let koukaon = "";
 		let serifu = "";
@@ -280,36 +316,36 @@ function success(position) {
 				let lonHani = 0; // 経度：比較するため
 				WhileCnt = 0;
 
-				// 80か所のマーカーの緯度経度と現在地を比較する(大体近ければOK。どれくらいの数値誤差で比較するか要検討)
+				// 80か所のマーカーの緯度経度と現在地を比較する(大体近ければOK)
 				while(WhileCnt < 200){
 					
 					// 現在の緯度経度の差分を計算
-
 					latHani = Math.floor((latChkHai[WhileCnt] - lat) * Math.pow(10,5)) / Math.pow(10,5);
 					lonHani = Math.floor((lonChkHai[WhileCnt] - lon) * Math.pow(10,5)) / Math.pow(10,5);
-
+					
 					// console.log("緯度" + WhileCnt + "回目：" + latChkHai[WhileCnt] + " - " + lat + " = " + latHani);
 					// console.log("経度" + WhileCnt + "回目：" + lonChkHai[WhileCnt] + " - " + lon + " = " + lonHani);
 
-					// 計算結果を比較する　緯度バージョン
-					if(latHani <= 0.00001 && latHani >= -0.00001){
+					// 計算結果を比較する　緯度バージョン　0.0001
+					if(latHani <= 0.0001 && latHani >= -0.0001){
 						a++;
+
 						// console.log(WhileCnt + "回目：" +  "a:" + a)
 						// 計算結果を比較する　経度バージョン
-						if(lonHani <= 0.00001 && lonHani >= -0.00001 ){
+						if(lonHani <= 0.0001 && lonHani >= -0.0001 ){
 							a++;
 							// console.log(WhileCnt + "回目：" +  "a:" + a)
-							WhileCnt = WhileCnt + 80;    // whileから抜けるため 
+							WhileCnt = WhileCnt + 200;    // whileから抜けるため 
+
 						}else{
 							a = 0;
 						}
 					}else{
 						a = 0;
-						WhileCnt++;	
-					}	
+					}
+					WhileCnt++;	
 				}
-
-				console.log("while抜けたところのa:" + a)
+				// console.log("while抜けたところのa:" + a)
 
 				let uttearnce = new SpeechSynthesisUtterance();
 				uttearnce.volume = 1;
@@ -343,7 +379,7 @@ function success(position) {
 				// チェックポイントが近くない場合　10分ごとにランダムセリフをしゃべる　10分インターバル中はしゃべらない
 				} else {
 					// idouCntMod = idouCnt % 60;		// 10分に1回しゃべりたい 10秒ごとに位置計測する 6回で1分×10回
-					idouCntMod = idouCnt % 6;		// 1分に1回しゃべる　テスト用
+					idouCntMod = idouCnt % 60;		// 1分に1回しゃべる　テスト用
 					console.log("回数：" + idouCnt);
 					console.log("余り：" + idouCntMod);
 					if(idouCntMod === 0){				// あまりが0だったらしゃべる
@@ -369,7 +405,7 @@ function success(position) {
 				clearInterval(idou);
 
 				// 画面再読み込み
-				// location.reload();
+				location.reload();
 			});
 
 			function errorIn() {
