@@ -1,0 +1,56 @@
+.header {
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  left: 0px;
+  top: 0px;
+  background: #152783;
+	z-index: 4;
+}
+
+/*ROGO_MotoRin_*/
+.header-logo {
+  position: absolute;
+  /*width: 15%;*/
+  height: 55px;
+  left: 7px;
+  top: 30px;
+  z-index: 5;
+}
+
+/*メインページに戻るボタンの色*/
+.item {
+	background: #0bd;
+  color: #fff;
+  margin: 20px;
+  font-size: 35px;
+  padding: 10px;
+  z-index: 6;
+  
+}
+
+/*メインページに戻るボタンの位置*/
+.container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*スペシャルサンクスのエリア*/
+.galleryAll {
+  color: #152783;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.galleryHD {
+  font-size: 55px;
+}
+
+.galleryM {
+  font-size: 45px;
+}

@@ -58,6 +58,8 @@
 /*---------------------------------------------*/
 /*ハンバーガーメニュー*/
 /*---------------------------------------------*/
+
+
 /* 
 hamburger(ハンバーガーアイコン)
 =================================== */
@@ -121,7 +123,9 @@ sp-nav(ナビ)
   background-color: #fff;
   transition: all 0.5s;
   z-index: 200;
-  overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+/*  overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+  overflow-y: scroll;
+/*  overflow: scroll;*/
 }
 
 /*ハンバーガーがクリックされたら右からスライド*/
@@ -160,8 +164,22 @@ black-bg(ハンバーガーメニュー解除用bg)
   font-size: 50px;
 }
 
-.moveSite{
+/* SpecialThanks、noteへのリンク */
+.moveSite {
+  font-size: 40px;
+}
 
-  font-size: 50px;
+/* noteに飛ぶよ～っていうところ */
+.moveNotes {
+  font-size: 25px;
+}
 
+/* Galleryへ */
+.moveGallery {
+  font-size: 40px;
+}
+
+/* リストの・を消す */
+ul {
+  list-style: none;
 }

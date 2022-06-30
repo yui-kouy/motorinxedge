@@ -43,16 +43,27 @@ function success(position) {
 
 	// 現在地アイコンの配列 HTMLのURLと順番を揃えないとダメ
 	const aiconUrl = ["https://maps.gsi.go.jp/image/map/crosshairs.png",
-					  "https://i.postimg.cc/63mKxMZP/I8d1-Di-HQY8e5-Meu1635871349-1635871569.jpg",
-					  "https://i.gyazo.com/d5d2d6a399df1c6f068b2b7a6ddde688.jpg",
-					  "https://i.gyazo.com/c15ee5223e562ebcd5dacd26f9efd0e0.jpg",
-					  "https://i.gyazo.com/3feffe80b4c806b2a6d40dbe63becabd.jpg"];
+					  "https://i.gyazo.com/f6d7d2394486dee4afa3179b0388ea77.jpg",
+					  "https://i.gyazo.com/a441e4947693b79ec40ccdcaa093b136.jpg",
+					  "https://i.gyazo.com/e7d91db048fa6a9e69069813b4dba846.jpg",
+					  "https://i.gyazo.com/58345f29672a4fbb4aae921b75438b24.jpg",
+					  "https://i.gyazo.com/90a2a60506c0a66bb484b32ca21c6c1d.jpg",
+					  "https://i.gyazo.com/715768ba7cbce81f6a0da3b6fb4087f8.jpg",
+					  "https://i.gyazo.com/175de6a59ab2aa5aca1f6c701676261f.jpg",
+					  "https://i.gyazo.com/af095ad825d3dc09795a73efabf6b7a3.jpg",
+					  "https://i.gyazo.com/e6b35705e35672a306d70975726139bc.jpg",
+					  "https://i.gyazo.com/42b2a0eab7ea7f538ddf61d006259784.jpg",
+					  "https://i.gyazo.com/842c0cb18422fea2b7ed2f3f38e718ae.jpg",
+					  "https://i.gyazo.com/8f88aa7637080156276d6f54880cce76.jpg",
+					  "https://i.gyazo.com/017df26d75542a57fd3e56cb14b11e7c.jpg",
+					  "https://i.gyazo.com/cb818ba60a23a8429e2d5fd8128bcfe0.jpg"
+					];
 
 	// アイコンを指定 初期アイコンは十字+
 	let crossIcon = L.icon({
 		iconUrl: aiconUrl[0],
-		iconSize: [45, 45],
-		iconAnchor: [16, 16]
+		iconSize: [100, ],
+		iconAnchor: [20, 20]
 	});
 
 	// アイコンをマップのセンターに表示
@@ -75,8 +86,8 @@ function success(position) {
 
 		crossIcon = L.icon({
 			iconUrl: aiconUrl[aiconNo],
-			iconSize: [45, 45],
-			iconAnchor: [16, 16]
+			iconSize: [100, ],
+			iconAnchor: [20, 20]
 		});
 
 		// アイコンをマップのセンターに表示
@@ -311,11 +322,11 @@ function success(position) {
 				// whileでループ処理してすべて確認する
 				// 一致していたらチェックポイントの処理に入る
 				
-				let a=0; // ifのために一時的に使用 a=2だったら緯度経度両方が近いことになるはず
+				let a=0; // ifのために一時的に使用 a=2だったら緯度経度両方が近いことになる
 				let latHani = 0; // 緯度：比較するため
 				let lonHani = 0; // 経度：比較するため
 				WhileCnt = 0;
-
+				
 				// 80か所のマーカーの緯度経度と現在地を比較する(大体近ければOK)
 				while(WhileCnt < 200){
 					
@@ -405,7 +416,7 @@ function success(position) {
 				clearInterval(idou);
 
 				// 画面再読み込み
-				location.reload();
+				//location.reload();
 			});
 
 			function errorIn() {
