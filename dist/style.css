@@ -164,14 +164,48 @@ black-bg(ハンバーガーメニュー解除用bg)
   font-size: 50px;
 }
 
+.hrLine {
+  border-top: 3px dashed #152783;
+}
+
 /* SpecialThanks、noteへのリンク */
 .moveSite {
   font-size: 40px;
+  line-height: 2
 }
 
 /* noteに飛ぶよ～っていうところ */
 .moveNotes {
   font-size: 25px;
+  
+}
+
+.iconSel {
+  font-size: 28px;
+  color: #152783;
+  font-weight: bold; 
+}
+
+/*メインページに戻るボタンの色*/
+.item {
+	background: #0bd;
+  color: #fff;
+  margin: 20px;
+  font-size: 35px;
+  padding: 10px;
+  z-index: 6;
+  line-height: 1.0em
+}
+
+/*specialThanks、noteへ移動するボタン*/
+.item2 {
+	background: #0bd;
+  color: #fff;
+  /*margin: 20px;*/
+  font-size: 35px;
+  padding: 10px;
+  z-index: 6;
+  line-height: 1.0em
 }
 
 /* Galleryへ */

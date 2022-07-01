@@ -26,7 +26,6 @@
   font-size: 35px;
   padding: 10px;
   z-index: 6;
-  
 }
 
 /*メインページに戻るボタンの位置*/
@@ -53,4 +52,8 @@
 
 .SpeThanM {
   font-size: 40px;
+}
+
+.hrLine {
+  border-top: 3px dashed #152783;
 }
